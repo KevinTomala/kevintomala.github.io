@@ -1,0 +1,19 @@
+<section class="portfolio-header">
+  <div class="container">
+    <h1>Portafolio</h1>
+    <p>Explora algunos de los proyectos que he desarrollado, enfocados en automatización, arquitectura y escalabilidad.</p>
+  </div>
+</section>
+
+<section class="projects">
+  <div class="container">
+    <div class="project-card" *ngFor="let project of projects">
+      <h2>{{ project.title }}</h2>
+      <p>{{ project.description }}</p>
+      <ul>
+        <li *ngFor="let tech of project.technologies">🔧 {{ tech }}</li>
+      </ul>
+      <a [href]="project.link" target="_blank" class="btn">Ver proyecto</a>
+    </div>
+  </div>
+</section>

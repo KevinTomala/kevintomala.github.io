@@ -1,0 +1,61 @@
+.hero {
+  padding: 4rem 2rem;
+  text-align: center;
+  background-color: #f8f9fa;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  color: #555;
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #6366f1;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.highlights {
+  padding: 2rem;
+  background-color: #fff;
+}
+
+.highlights ul {
+  list-style: none;
+  padding: 0;
+}
+
+.highlights li {
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+.contact-cta {
+  padding: 3rem 2rem;
+  text-align: center;
+  background-color: #e9ecef;
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 1rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+}

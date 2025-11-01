@@ -1,59 +1,54 @@
-# Prueba
+# Kevin Tomala — Portafolio Profesional
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.7.
+Bienvenido a mi portafolio personal, desarrollado con Angular. Aquí presento mis proyectos, habilidades y experiencia como desarrollador de software enfocado en automatización, arquitectura de sistemas académicos y soluciones escalables.
 
-## Development server
+## 🚀 Tecnologías utilizadas
 
-To start a local development server, run:
+- Angular 19
+- TypeScript
+- HTML5 & CSS3
+- Bootstrap / Tailwind (según tu elección)
+- Git & GitHub
 
-```bash
-ng serve
-```
+## 🌐 Demo en vivo
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Accede a la versión desplegada en GitHub Pages:
 
-## Code scaffolding
+👉 [kevintomala.github.io](https://kevintomala.github.io)
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 📦 Instalación local
 
-```bash
-ng generate component component-name
-```
+1. Clona el repositorio:
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+   ```bash
+   git clone https://github.com/kevintomala/kevintomala.github.io.git
+   cd kevintomala.github.io
+2. - Instala las dependencias:
+    npm install
+3. - Levanta el servidor de desarrollo:
+    ng serve
 
-```bash
-ng generate --help
-```
+4. - Abre tu navegador en http://localhost:4200/
+🛠️ Scripts útiles
+- ng build — Compila la aplicación para producción.
+- ng generate component nombre — Crea un nuevo componente.
+- ng test — Ejecuta pruebas unitarias (si están habilitadas).
+📁 Estructura del proyecto
+src/
+├── app/
+│   ├── home/
+│   ├── about/
+│   ├── projects/
+│   └── contact/
+├── assets/
+└── index.html
 
-## Building
 
-To build the project run:
+📫 Contacto
+- 💼 LinkedIn
+- 📧 kevintomala@example.com
+- 🌍 La Libertad, Ecuador
 
-```bash
-ng build
-```
+Este proyecto está en constante evolución. ¡Gracias por visitarlo!
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---

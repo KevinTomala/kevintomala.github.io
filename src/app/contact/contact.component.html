@@ -1,0 +1,48 @@
+<section class="contact-header">
+  <div class="container">
+    <h1>Contacto</h1>
+    <p>¿Quieres colaborar conmigo o tienes alguna consulta? Envíame un mensaje, estoy disponible para oportunidades remotas e internacionales.</p>
+  </div>
+</section>
+
+<section class="contact-form">
+  <div class="container">
+    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+      <label>
+        Nombre:
+        <input type="text" formControlName="name" />
+        <span *ngIf="contactForm.get('name')?.invalid && contactForm.get('name')?.touched">
+          El nombre es obligatorio.
+        </span>
+      </label>
+
+      <label>
+        Correo electrónico:
+        <input type="email" formControlName="email" />
+        <span *ngIf="contactForm.get('email')?.invalid && contactForm.get('email')?.touched">
+          Ingresa un correo válido.
+        </span>
+      </label>
+
+      <label>
+        Mensaje:
+        <textarea rows="5" formControlName="message"></textarea>
+        <span *ngIf="contactForm.get('message')?.invalid && contactForm.get('message')?.touched">
+          El mensaje debe tener al menos 10 caracteres.
+        </span>
+      </label>
+
+      <button type="submit" class="btn">Enviar mensaje</button>
+    </form>
+  </div>
+</section>
+
+<section class="contact-info">
+  <div class="container">
+    <ul>
+      <li>📧 Email: <a href="mailto:kevintomala.27&#64;gmail.com">kevintomala.dev&#64;gmail.com</a></li>
+      <li>💼 LinkedIn: <a href="https://linkedin.com/in/kevintomala" target="_blank">linkedin.com/in/kevintomala</a></li>
+      <li>📁 GitHub: <a href="https://github.com/kevintomala" target="_blank">github.com/kevintomala</a></li>
+    </ul>
+  </div>
+</section>
