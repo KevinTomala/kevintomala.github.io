@@ -1,11 +1,138 @@
-<nav class="navbar">
-  <div class="container">
-    <a routerLink="/" class="nav-link">Inicio</a>
-    <a routerLink="/portfolio" class="nav-link">Portafolio</a>
-    <a routerLink="/contact" class="nav-link">Contacto</a>
-    <a routerLink="/about" class="nav-link">Sobre mí</a>
-
+<!-- Header -->
+<header class="header">
+  <button class="menu-btn" (click)="toggleSidebar()">
+    <span class="menu-icon"></span>
+    <span class="menu-icon"></span>
+    <span class="menu-icon"></span>
+  </button>
+  
+  <div class="header-logo">
+    <div><img src="assets/images/logos/A.png" alt="A" class="logo-icon" /></div>
+    <span class="logo-text">Mi Portfolio</span>
   </div>
-</nav>
 
-<router-outlet></router-outlet>
+ <div class="header-actions">
+    <div class="profile-container">
+      <button class="profile-btn" (click)="toggleProfileMenu()">
+        <span class="profile-name">{{ userName }}</span>
+        <span class="chevron" [class.rotated]="isProfileMenuOpen">▼</span>
+      </button>
+
+      <!-- Menú desplegable de perfil -->
+      <div class="profile-menu" [class.active]="isProfileMenuOpen">
+        <button 
+          *ngFor="let item of perfilItems" 
+          class="profile-menu-item"
+          [routerLink]="item.route || null"
+          (click)="handleProfileAction(item.id)"
+        >
+          <span class="profile-menu-icon">{{ item.icon }}</span>
+          <span class="profile-menu-label">{{ item.label }}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Overlay -->
+<div class="overlay" [class.active]="isSidebarOpen" (click)="closeSidebar()"></div>
+
+<!-- Sidebar -->
+<aside class="sidebar" [class.active]="isSidebarOpen">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">
+      <div><img src="assets/images/logos/A.png" alt="A" class="logo-icon" /></div>
+          <button class="profile-btn" (click)="toggleProfileMenu()">
+          <span class="profile-name">{{ userName }}</span>
+        </button>
+    </div>
+    <button class="close-btn" (click)="closeSidebar()">✕</button>
+  </div>
+
+<div class="search-box">
+  <!-- Vista por defecto (Ctrl+K) -->
+  <div class="search-input" *ngIf="!isSearchActive" (click)="toggleSearch()">
+    <span class="search-icon">🔍</span>
+    <span class="search-placeholder">Buscar...</span>
+    <div class="search-keys">
+      <span class="search-key">Ctrl</span>
+      <span class="search-key">K</span>
+    </div>
+  </div>
+
+  <!-- Input de búsqueda activo -->
+  <div class="search-input-container" *ngIf="isSearchActive">
+    <span class="search-icon">🔍</span>
+    <input 
+      type="text" 
+      class="search-input-field"
+      [(ngModel)]="searchQuery"
+      (keyup.enter)="handleSearch()"
+      placeholder="Buscar en el portfolio..."
+    />
+    <button class="search-close" (click)="closeSearch()">✕</button>
+  </div>
+
+  <!-- Resultados de búsqueda -->
+  <div class="search-results" *ngIf="isSearchActive && searchQuery">
+    <div class="search-results-header">Resultados</div>
+    <a 
+      *ngFor="let item of searchResults"
+      [routerLink]="item.route"
+      class="search-result-item"
+      (click)="closeSearch(); closeSidebar()"
+    >
+      <span class="search-result-icon">{{ item.icon }}</span>
+      <span class="search-result-label">{{ item.label }}</span>
+    </a>
+    <div *ngIf="searchResults.length === 0" class="search-no-results">
+      No se encontraron resultados
+    </div>
+  </div>
+</div>
+
+  <nav class="sidebar-nav">
+    <div *ngFor="let item of menuItems" class="nav-item-wrapper">
+      <!-- Si tiene link, usa routerLink directamente -->
+      <a 
+        *ngIf="item.link && item.route"
+        [routerLink]="item.route"
+        class="nav-item"
+        (click)="closeSidebar()"
+        routerLinkActive="active"
+      >
+        <span class="nav-icon">{{ item.icon }}</span>
+        <span class="nav-label">{{ item.label }}</span>
+      </a>
+
+      <!-- Si tiene subitems, usa button -->
+      <button 
+        *ngIf="!item.link || !item.route"
+        class="nav-item"
+        (click)="item.subitems && toggleSection(item.id)"
+      >
+        <span class="nav-icon">{{ item.icon }}</span>
+        <span class="nav-label">{{ item.label }}</span>
+        <span *ngIf="item.subitems" class="chevron" [class.rotated]="openSections[item.id]">▼</span>
+      </button>
+
+      <!-- Subitems con routerLink -->
+      <div *ngIf="item.subitems && openSections[item.id]" class="subitems">
+        <a 
+          *ngFor="let subitem of item.subitems" 
+          [routerLink]="subitem.route"
+          class="subitem"
+          (click)="closeSidebar()"
+          routerLinkActive="active"
+        >
+          {{ subitem.label }}
+        </a>
+      </div>
+    </div>
+  </nav>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+  <router-outlet></router-outlet>
+</main>
