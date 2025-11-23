@@ -1,26 +1,260 @@
+<!-- Hero Section con efecto de partículas -->
 <section class="hero">
+  <div class="particles">
+    <div class="particle" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]"></div>
+  </div>
+  
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="status-dot"></span>
+      Disponible para proyectos
+    </div>
+    
+    <h1 class="hero-title">
+      Hola, soy <span class="gradient-text">Kevin Tomala</span>
+    </h1>
+    
+    <div class="typing-container">
+      <h2 class="hero-subtitle">{{ displayedText }}<span class="cursor">|</span></h2>
+    </div>
+    
+    <p class="hero-description">
+      Desarrollador de software enfocado en automatización, arquitectura de sistemas 
+      académicos y soluciones escalables. Transformo ideas en productos digitales excepcionales.
+    </p>
+    
+    <div class="hero-buttons">
+      <a routerLink="/portfolio" class="btn btn-primary">
+        Ver portafolio
+        <span class="btn-icon">→</span>
+      </a>
+      <a routerLink="/contact" class="btn btn-secondary">
+        Contáctame
+        <span class="btn-icon">✉️</span>
+      </a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat-item" *ngFor="let stat of stats">
+        <div class="stat-number">{{ stat.number }}</div>
+        <div class="stat-label">{{ stat.label }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-image">
+  <div class="image-glow"></div>
+  <div class="team-circle">
+    <div class="central-hub">
+      <div class="hub-pulse"></div>
+      <div class="hub-icon">💻</div>
+    </div>
+    
+    <div class="team-member team-member-1">
+      <div class="member-card">
+        <div class="member-emoji">🧑🏻‍💻</div>
+      </div>
+    </div>
+    
+    <div class="team-member team-member-2">
+      <div class="member-card">
+        <div class="member-emoji">🧑🏾‍💻</div>
+      </div>
+    </div>
+    
+    <div class="team-member team-member-3">
+      <div class="member-card">
+        <div class="member-emoji">👩🏻‍💻</div>
+      </div>
+    </div>
+    
+   
+    
+    <div class="team-member team-member-4">
+      <div class="member-card">
+        <div class="member-emoji">👩🏾‍💻</div>
+      </div>
+    </div>
+
+    <!-- Líneas de conexión -->
+    <svg class="connection-lines" viewBox="0 0 400 400">
+      <circle cx="200" cy="200" r="120" fill="none" stroke="rgba(236, 72, 153, 0.2)" stroke-width="2" stroke-dasharray="5,5">
+        <animateTransform
+          attributeName="transform"
+          type="rotate"
+          from="0 200 200"
+          to="360 200 200"
+          dur="20s"
+          repeatCount="indefinite"/>
+      </circle>
+    </svg>
+  </div>
+</div>
+</section>
+
+<!-- Skills Section -->
+<section class="skills">
   <div class="container">
-    <h1>Hola, soy Kevin Tomala</h1>
-    <p>Desarrollador de software enfocado en automatización, arquitectura de sistemas académicos y soluciones escalables.</p>
-    <a routerLink="/portfolio" class="btn">Ver portafolio</a>
+    <h2 class="section-title">
+      <span class="title-highlight">¿Qué hago?</span>
+    </h2>
+    
+    <div class="skills-grid">
+      <div class="skill-card" *ngFor="let skill of skills">
+        <div class="skill-icon">{{ skill.icon }}</div>
+        <h3 class="skill-title">{{ skill.title }}</h3>
+        <p class="skill-description">{{ skill.description }}</p>
+        <div class="skill-shine"></div>
+      </div>
+    </div>
   </div>
 </section>
 
-<section class="highlights">
+<!-- Technologies Section -->
+<!-- Carrusel de tecnologías destacadas -->
+<section class="technologies-carousel">
   <div class="container">
-    <h2>¿Qué hago?</h2>
-    <ul>
-      <li>⚙️ Automatización de flujos frontend/backend</li>
-      <li>📦 Arquitectura de microservicios y módulos reutilizables</li>
-      <li>🧠 Soluciones resilientes y escalables para equipos</li>
-    </ul>
+    <h2 class="section-title">
+      <span class="title-highlight">Tecnologías que domino</span>
+    </h2>
+    
+    <div class="tech-carousel-container">
+      <!-- Primera fila -->
+      <div class="tech-carousel tech-carousel-1">
+        <div class="tech-track">
+          <div class="tech-item" *ngFor="let tech of featuredTechnologies[0]">
+            <div class="tech-logo-wrapper" [style.--tech-color]="tech.color">
+              <img [src]="tech.logo" [alt]="tech.name" class="tech-logo">
+            </div>
+            <span class="tech-name">{{ tech.name }}</span>
+          </div>
+          <!-- Duplicar para efecto infinito -->
+          <div class="tech-item" *ngFor="let tech of featuredTechnologies[0]">
+            <div class="tech-logo-wrapper" [style.--tech-color]="tech.color">
+              <img [src]="tech.logo" [alt]="tech.name" class="tech-logo">
+            </div>
+            <span class="tech-name">{{ tech.name }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Segunda fila (dirección inversa) -->
+      <div class="tech-carousel tech-carousel-2">
+        <div class="tech-track tech-track-reverse">
+          <div class="tech-item" *ngFor="let tech of featuredTechnologies[1]">
+            <div class="tech-logo-wrapper" [style.--tech-color]="tech.color">
+              <img [src]="tech.logo" [alt]="tech.name" class="tech-logo">
+            </div>
+            <span class="tech-name">{{ tech.name }}</span>
+          </div>
+          <!-- Duplicar para efecto infinito -->
+          <div class="tech-item" *ngFor="let tech of featuredTechnologies[1]">
+            <div class="tech-logo-wrapper" [style.--tech-color]="tech.color">
+              <img [src]="tech.logo" [alt]="tech.name" class="tech-logo">
+            </div>
+            <span class="tech-name">{{ tech.name }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<section class="contact-cta">
+<!-- Grid de tecnologías por categoría -->
+<section class="technologies-grid">
   <div class="container">
-    <h2>¿Colaboramos?</h2>
-    <p>Estoy abierto a oportunidades remotas e internacionales. ¡Hablemos!</p>
-    <a routerLink="/contact" class="btn">Contáctame</a>
+    <h2 class="section-title">
+      <span class="title-highlight">Stack Tecnológico Completo</span>
+    </h2>
+    
+    <div class="tech-categories">
+      <div class="tech-category">
+        <h3 class="category-title">
+          <span class="category-icon">🎨</span>
+          Frontend
+        </h3>
+        <div class="tech-items">
+          <div class="tech-badge" *ngFor="let tech of technologies.frontend" [style.--tech-color]="tech.color">
+            <img [src]="tech.logo" [alt]="tech.name" class="tech-badge-logo">
+            <span class="tech-badge-name">{{ tech.name }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tech-category">
+    <h3 class="category-title">
+      <span class="category-icon">📱</span>
+      Mobile
+    </h3>
+    <div class="tech-items">
+      <div class="tech-badge" *ngFor="let tech of technologies.mobile" [style.--tech-color]="tech.color">
+        <img [src]="tech.logo" [alt]="tech.name" class="tech-badge-logo">
+        <span class="tech-badge-name">{{ tech.name }}</span>
+      </div>
+    </div>
+  </div>
+
+      <div class="tech-category">
+        <h3 class="category-title">
+          <span class="category-icon">⚙️</span>
+          Backend
+        </h3>
+        <div class="tech-items">
+          <div class="tech-badge" *ngFor="let tech of technologies.backend" [style.--tech-color]="tech.color">
+            <img [src]="tech.logo" [alt]="tech.name" class="tech-badge-logo">
+            <span class="tech-badge-name">{{ tech.name }}</span>
+          </div>
+        </div>
+      </div>
+      
+
+      <div class="tech-category">
+        <h3 class="category-title">
+          <span class="category-icon">🗄️</span>
+          Databases
+        </h3>
+        <div class="tech-items">
+          <div class="tech-badge" *ngFor="let tech of technologies.database" [style.--tech-color]="tech.color">
+            <img [src]="tech.logo" [alt]="tech.name" class="tech-badge-logo">
+            <span class="tech-badge-name">{{ tech.name }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tech-category">
+        <h3 class="category-title">
+          <span class="category-icon">🛠️</span>
+          DevOps & Tools
+        </h3>
+        <div class="tech-items">
+          <div class="tech-badge" *ngFor="let tech of technologies.tools" [style.--tech-color]="tech.color">
+            <img [src]="tech.logo" [alt]="tech.name" class="tech-badge-logo">
+            <span class="tech-badge-name">{{ tech.name }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta">
+  <div class="cta-background">
+    <div class="cta-circle cta-circle-1"></div>
+    <div class="cta-circle cta-circle-2"></div>
+  </div>
+  
+  <div class="container">
+    <div class="cta-content">
+      <h2 class="cta-title">¿Colaboramos?</h2>
+      <p class="cta-description">
+        Estoy abierto a oportunidades remotas e internacionales. 
+        ¡Construyamos algo increíble juntos!
+      </p>
+      <a routerLink="/contact" class="btn btn-large">
+        Iniciar conversación
+        <span class="btn-icon">💬</span>
+      </a>
+    </div>
   </div>
 </section>
