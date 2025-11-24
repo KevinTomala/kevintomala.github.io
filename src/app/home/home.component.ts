@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     { icon: '🧠', title: 'Soluciones', description: 'Sistemas resilientes para equipos' },
     { icon: '🚀', title: 'Performance', description: 'Optimización y mejores prácticas' }
   ];
-
+  private originalSizes: Map<string, number> = new Map();
   bubbleTechnologies: Technology[] = [
     { name: 'Angular', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/angular.svg', color: '#DD0031', size: 70 },
     { name: 'React', logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/react.svg', color: '#61DAFB', size: 75 },
@@ -109,6 +109,9 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit() {
     this.typeWriter();
+    this.bubbleTechnologies.forEach(tech => {
+      this.originalSizes.set(tech.name, tech.size || 70);
+    });
   }
 
   ngAfterViewInit() {
@@ -119,22 +122,23 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     }, 100);
   }
   adjustBubbleSizes() {
-  const screenWidth = window.innerWidth;
-  let sizeMultiplier = 1;
+    const screenWidth = window.innerWidth;
+    let sizeMultiplier = 1;
 
-  if (screenWidth <= 480) {
-    sizeMultiplier = 0.5; // 50% más pequeño en móviles pequeños
-  } else if (screenWidth <= 768) {
-    sizeMultiplier = 0.65; // 65% en tablets
-  } else if (screenWidth <= 968) {
-    sizeMultiplier = 0.8; // 80% en tablets grandes
+    if (screenWidth <= 480) {
+      sizeMultiplier = 0.6; // 60% en móviles pequeños
+    } else if (screenWidth <= 768) {
+      sizeMultiplier = 0.75; // 75% en tablets
+    } else if (screenWidth <= 968) {
+      sizeMultiplier = 0.85; // 85% en tablets grandes
+    }
+
+    this.bubbleTechnologies.forEach(tech => {
+      // USAR el tamaño original guardado, no el actual
+      const originalSize = this.originalSizes.get(tech.name) || 70;
+      tech.size = Math.round(originalSize * sizeMultiplier);
+    });
   }
-
-  this.bubbleTechnologies.forEach(tech => {
-    const originalSize = tech.size || 70;
-    tech.size = Math.round(originalSize * sizeMultiplier);
-  });
-}
   ngOnDestroy() {
     if (this.animationId) {
       cancelAnimationFrame(this.animationId);
