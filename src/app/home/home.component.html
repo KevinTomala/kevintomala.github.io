@@ -111,55 +111,30 @@
 </section>
 
 <!-- Technologies Section -->
-<!-- Carrusel de tecnologías destacadas -->
-<section class="technologies-carousel">
+<!-- Burbujas flotantes de tecnologías -->
+<section class="technologies-bubbles">
   <div class="container">
     <h2 class="section-title">
       <span class="title-highlight">Tecnologías que domino</span>
     </h2>
     
-    <div class="tech-carousel-container">
-      <!-- Primera fila -->
-      <div class="tech-carousel tech-carousel-1">
-        <div class="tech-track">
-          <div class="tech-item" *ngFor="let tech of featuredTechnologies[0]">
-            <div class="tech-logo-wrapper" [style.--tech-color]="tech.color">
-              <img [src]="tech.logo" [alt]="tech.name" class="tech-logo">
-            </div>
-            <span class="tech-name">{{ tech.name }}</span>
-          </div>
-          <!-- Duplicar para efecto infinito -->
-          <div class="tech-item" *ngFor="let tech of featuredTechnologies[0]">
-            <div class="tech-logo-wrapper" [style.--tech-color]="tech.color">
-              <img [src]="tech.logo" [alt]="tech.name" class="tech-logo">
-            </div>
-            <span class="tech-name">{{ tech.name }}</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Segunda fila (dirección inversa) -->
-      <div class="tech-carousel tech-carousel-2">
-        <div class="tech-track tech-track-reverse">
-          <div class="tech-item" *ngFor="let tech of featuredTechnologies[1]">
-            <div class="tech-logo-wrapper" [style.--tech-color]="tech.color">
-              <img [src]="tech.logo" [alt]="tech.name" class="tech-logo">
-            </div>
-            <span class="tech-name">{{ tech.name }}</span>
-          </div>
-          <!-- Duplicar para efecto infinito -->
-          <div class="tech-item" *ngFor="let tech of featuredTechnologies[1]">
-            <div class="tech-logo-wrapper" [style.--tech-color]="tech.color">
-              <img [src]="tech.logo" [alt]="tech.name" class="tech-logo">
-            </div>
-            <span class="tech-name">{{ tech.name }}</span>
-          </div>
+    <div class="bubble-container" (mousemove)="onMouseMoveContainer($event)" (mouseleave)="onMouseLeaveContainer()">
+      <div 
+        *ngFor="let tech of bubbleTechnologies; trackBy: trackByName"
+        class="bubble"
+        [style.left.px]="tech.x"
+        [style.top.px]="tech.y"
+        [style.width.px]="tech.size"
+        [style.height.px]="tech.size"
+        [style.--bubble-color]="tech.color"
+      >
+        <div class="bubble-inner">
+          <img [src]="tech.logo" [alt]="tech.name" class="bubble-logo">
         </div>
       </div>
     </div>
   </div>
 </section>
-
 <!-- Grid de tecnologías por categoría -->
 <section class="technologies-grid">
   <div class="container">
