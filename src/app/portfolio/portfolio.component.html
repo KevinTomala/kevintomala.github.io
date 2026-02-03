@@ -1,19 +1,116 @@
 <section class="portfolio-header">
   <div class="container">
-    <h1>Portafolio</h1>
-    <p>Explora algunos de los proyectos que he desarrollado, enfocados en automatización, arquitectura y escalabilidad.</p>
+    <span class="header-badge">Portafolio</span>
+    <h1>Proyectos en produccion y en proceso</h1>
+    <p>
+      Estos proyectos combinan desarrollo web, mantenimiento continuo y productos
+      en construccion. Cada tarjeta muestra el dominio real, el equipo y el stack
+      principal, con una vista previa similar a un deployment en Vercel.
+    </p>
   </div>
 </section>
 
 <section class="projects">
   <div class="container">
-    <div class="project-card" *ngFor="let project of projects">
-      <h2>{{ project.title }}</h2>
-      <p>{{ project.description }}</p>
-      <ul>
-        <li *ngFor="let tech of project.technologies">🔧 {{ tech }}</li>
-      </ul>
-      <a [href]="project.link" target="_blank" class="btn">Ver proyecto</a>
+    <div class="project-card" *ngFor="let project of projects; trackBy: trackByTitle">
+      <div class="project-preview" [class.is-placeholder]="!project.siteUrl">
+        <ng-container *ngIf="project.siteUrl; else previewPlaceholder">
+          <a [href]="project.siteUrl" target="_blank" rel="noopener">
+            <img
+              [src]="getPreviewImage(project.siteUrl)"
+              [alt]="'Preview de ' + project.title"
+              loading="lazy"
+            />
+          </a>
+        </ng-container>
+        <ng-template #previewPlaceholder>
+          <div class="preview-placeholder">
+            <span class="placeholder-label">{{ project.previewLabel || 'Sin publicacion' }}</span>
+          </div>
+        </ng-template>
+      </div>
+
+      <div class="project-content">
+        <div class="project-top">
+          <div class="project-title-wrap">
+            <h2 class="project-title">
+              <a *ngIf="project.siteUrl; else titleText" [href]="project.siteUrl" target="_blank" rel="noopener">
+                {{ project.title }}
+              </a>
+              <ng-template #titleText>{{ project.title }}</ng-template>
+            </h2>
+            <div class="project-meta-badges">
+              <span
+                class="status-pill"
+                [class.ready]="project.status === 'Listo'"
+                [class.progress]="project.status === 'En progreso'"
+                [class.maintenance]="project.status === 'En mantenimiento'"
+              >
+                {{ project.status }}
+              </span>
+              <span class="category-pill" *ngIf="project.category">{{ project.category }}</span>
+            </div>
+          </div>
+        </div>
+
+        <p class="project-description">{{ project.description }}</p>
+
+        <div class="project-details">
+          <div class="detail-row">
+            <span class="detail-label">Dominio</span>
+            <ng-container *ngIf="project.siteUrl; else noDomain">
+              <a class="detail-link" [href]="project.siteUrl" target="_blank" rel="noopener">
+                {{ getDomain(project.siteUrl) }}
+              </a>
+            </ng-container>
+            <ng-template #noDomain>
+              <span class="detail-muted">Sin dominio</span>
+            </ng-template>
+          </div>
+
+          <div class="detail-row">
+            <span class="detail-label">Codigo</span>
+            <ng-container *ngIf="project.repoUrl; else privateRepo">
+              <a class="detail-link" [href]="project.repoUrl" target="_blank" rel="noopener">
+                {{ getRepoLabel(project.repoUrl) }}
+              </a>
+            </ng-container>
+            <ng-template #privateRepo>
+              <span class="detail-muted">Privado</span>
+            </ng-template>
+          </div>
+
+          <div class="detail-row">
+            <span class="detail-label">Equipo</span>
+            <ng-container *ngIf="project.contributors?.length; else noTeam">
+              <span class="detail-team">
+                <ng-container *ngFor="let person of project.contributors; let last = last">
+                  <a class="detail-link" [href]="person.githubUrl" target="_blank" rel="noopener">
+                    {{ person.name }}
+                  </a>
+                  <span *ngIf="!last"> · </span>
+                </ng-container>
+              </span>
+            </ng-container>
+            <ng-template #noTeam>
+              <span class="detail-muted">Sin equipo</span>
+            </ng-template>
+          </div>
+        </div>
+
+        <div class="project-tech">
+          <span class="tech-pill" *ngFor="let tech of project.technologies">{{ tech }}</span>
+        </div>
+
+        <div class="project-actions">
+          <a *ngIf="project.siteUrl" [href]="project.siteUrl" target="_blank" rel="noopener" class="btn btn-primary">
+            Visitar
+          </a>
+          <a *ngIf="project.repoUrl" [href]="project.repoUrl" target="_blank" rel="noopener" class="btn btn-ghost">
+            Codigo
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </section>

@@ -1,6 +1,23 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+interface ProjectContributor {
+  name: string;
+  githubUrl: string;
+}
+
+interface Project {
+  title: string;
+  description: string;
+  technologies: string[];
+  siteUrl?: string;
+  repoUrl?: string;
+  status: 'Listo' | 'En progreso' | 'En mantenimiento';
+  category?: string;
+  contributors: ProjectContributor[];
+  previewLabel?: string;
+}
+
 @Component({
   selector: 'app-portfolio',
   standalone: true,
@@ -9,18 +26,126 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./portfolio.component.css'],
 })
 export class PortfolioComponent {
-  projects = [
+  projects: Project[] = [
     {
-      title: 'Sistema Académico Automatizado',
-      description: 'Plataforma para gestión de matrículas, notas y reportes con arquitectura modular.',
+      title: 'Sistema Academico Automatizado',
+      description: 'Plataforma para gestion de matriculas, notas y reportes con arquitectura modular.',
       technologies: ['Angular', 'Node.js', 'Docker', 'PowerShell'],
-      link: 'https://github.com/kevintomala/academic-system',
+      siteUrl: 'https://sg-academico.vercel.app/',
+      repoUrl: 'https://github.com/kevintomala/academic-system',
+      status: 'Listo',
+      category: 'Web App',
+      contributors: [
+        { name: 'Kevin Tomala', githubUrl: 'https://github.com/kevintomala' },
+        { name: 'SamVp29', githubUrl: 'https://github.com/SamVp29' }
+      ]
+    },
+    {
+      title: 'Generador QR',
+      description: 'Herramienta web para crear codigos QR personalizables y listos para descargar.',
+      technologies: ['Angular', 'TypeScript', 'CSS'],
+      siteUrl: 'https://kevintomala.github.io/qr-generate/features',
+      repoUrl: 'https://github.com/KevinTomala/qr-generate',
+      status: 'Listo',
+      category: 'Web App',
+      contributors: [
+        { name: 'Kevin Tomala', githubUrl: 'https://github.com/kevintomala' }
+      ]
+    },
+    {
+      title: 'Barbershop El Chino',
+      description: 'Sitio web para barberia con enfoque en reservas y presencia local.',
+      technologies: ['HTML', 'CSS', 'JavaScript'],
+      siteUrl: 'https://barbershopelchino.github.io/website/',
+      repoUrl: 'https://github.com/BarberShopElChino/website',
+      status: 'Listo',
+      category: 'Landing',
+      contributors: [
+        { name: 'Kevin Tomala', githubUrl: 'https://github.com/kevintomala' },
+        { name: 'BarberShopElChino', githubUrl: 'https://github.com/BarberShopElChino' }
+      ]
+    },
+    {
+      title: 'LLES Dental',
+      description: 'Mantenimiento y mejoras de sitio clinico con acceso privado.',
+      technologies: ['Angular', 'Node.js'],
+      siteUrl: 'https://llesdental.cendcap.com/login',
+      repoUrl: 'https://github.com/cendcap/llesdental',
+      status: 'En mantenimiento',
+      category: 'Mantenimiento',
+      contributors: [
+        { name: 'Kevin Tomala', githubUrl: 'https://github.com/kevintomala' },
+        { name: 'cendcap', githubUrl: 'https://github.com/cendcap' }
+      ]
+    },
+    {
+      title: 'CENDCAP',
+      description: 'Sitio institucional con actualizaciones de contenido y optimizacion.',
+      technologies: ['WordPress', 'HTML', 'CSS'],
+      siteUrl: 'https://cendcap.com/',
+      status: 'Listo',
+      category: 'Web',
+      contributors: [
+        { name: 'Kevin Tomala', githubUrl: 'https://github.com/kevintomala' }
+      ]
+    },
+    {
+      title: 'Aplicacion Movil (sin publicar)',
+      description: 'Aplicacion movil construida para flujos internos. Aun no publicada.',
+      technologies: ['React Native', 'Firebase'],
+      status: 'En progreso',
+      category: 'Mobile',
+      previewLabel: 'App movil sin publicacion',
+      contributors: [
+        { name: 'Kevin Tomala', githubUrl: 'https://github.com/kevintomala' }
+      ]
     },
     {
       title: 'Alpha Technologies',
-      description: 'Proyecto personal para soluciones escalables y automatización de flujos.',
-      technologies: ['Microservicios', 'Git Submodules', 'Linux/Windows'],
-      link: 'https://github.com/kevintomala/alpha-technologies',
+      description: 'Pagina corporativa en planificacion y definicion de marca.',
+      technologies: ['Branding', 'UX', 'Web'],
+      status: 'En progreso',
+      category: 'Web',
+      previewLabel: 'Sitio en planificacion',
+      contributors: [
+        { name: 'Kevin Tomala', githubUrl: 'https://github.com/kevintomala' }
+      ]
     },
   ];
+
+  getDomain(url?: string): string {
+    if (!url) return 'Sin dominio';
+
+    try {
+      const domain = new URL(url).hostname;
+      return domain.replace(/^www\./, '');
+    } catch {
+      return url;
+    }
+  }
+
+  getPreviewImage(url?: string): string | null {
+    if (!url) return null;
+
+    const encodedUrl = encodeURIComponent(url);
+    return `https://s0.wordpress.com/mshots/v1/${encodedUrl}?w=1200`;
+  }
+
+  getRepoLabel(url?: string): string {
+    if (!url) return 'Privado';
+
+    try {
+      const parsedUrl = new URL(url);
+      if (parsedUrl.hostname === 'github.com') {
+        return parsedUrl.pathname.replace(/^\//, '');
+      }
+      return url;
+    } catch {
+      return url;
+    }
+  }
+
+  trackByTitle(index: number, project: Project): string {
+    return project.title;
+  }
 }
