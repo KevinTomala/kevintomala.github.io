@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 interface ProjectContributor {
@@ -25,7 +25,12 @@ interface Project {
   templateUrl: './portfolio.component.html',
   styleUrls: ['./portfolio.component.css'],
 })
-export class PortfolioComponent {
+export class PortfolioComponent implements OnInit, OnDestroy {
+  displayedTitle = '';
+  fullTitle = 'Proyectos en produccion y en proceso';
+  titleTypingSpeed = 60;
+  private titleTimeoutId?: ReturnType<typeof setTimeout>;
+
   projects: Project[] = [
     {
       title: 'ADEMY - Sistema de Administración Academica',
@@ -113,6 +118,16 @@ export class PortfolioComponent {
     },
   ];
 
+  ngOnInit() {
+    this.typeTitle();
+  }
+
+  ngOnDestroy() {
+    if (this.titleTimeoutId) {
+      clearTimeout(this.titleTimeoutId);
+    }
+  }
+
   getDomain(url?: string): string {
     if (!url) return 'Sin dominio';
 
@@ -147,5 +162,12 @@ export class PortfolioComponent {
 
   trackByTitle(index: number, project: Project): string {
     return project.title;
+  }
+
+  private typeTitle(index = 0) {
+    if (index < this.fullTitle.length) {
+      this.displayedTitle += this.fullTitle.charAt(index);
+      this.titleTimeoutId = setTimeout(() => this.typeTitle(index + 1), this.titleTypingSpeed);
+    }
   }
 }
