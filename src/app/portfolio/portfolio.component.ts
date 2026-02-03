@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 interface ProjectContributor {
@@ -30,6 +30,7 @@ export class PortfolioComponent implements OnInit, OnDestroy {
   fullTitle = 'Proyectos en produccion y en proceso';
   titleTypingSpeed = 60;
   private titleTimeoutId?: ReturnType<typeof setTimeout>;
+  private maxParallax = 18;
 
   projects: Project[] = [
     {
@@ -118,6 +119,8 @@ export class PortfolioComponent implements OnInit, OnDestroy {
     },
   ];
 
+  constructor(private elRef: ElementRef<HTMLElement>, private renderer: Renderer2) {}
+
   ngOnInit() {
     this.typeTitle();
   }
@@ -162,6 +165,28 @@ export class PortfolioComponent implements OnInit, OnDestroy {
 
   trackByTitle(index: number, project: Project): string {
     return project.title;
+  }
+
+  @HostListener('mousemove', ['$event'])
+  onMouseMove(event: MouseEvent) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return;
+    }
+
+    const rect = this.elRef.nativeElement.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    const offsetX = ((x / rect.width) - 0.5) * 2 * this.maxParallax;
+    const offsetY = ((y / rect.height) - 0.5) * 2 * this.maxParallax;
+
+    this.renderer.setStyle(this.elRef.nativeElement, '--parallax-x', offsetX.toFixed(2));
+    this.renderer.setStyle(this.elRef.nativeElement, '--parallax-y', offsetY.toFixed(2));
+  }
+
+  @HostListener('mouseleave')
+  onMouseLeave() {
+    this.renderer.setStyle(this.elRef.nativeElement, '--parallax-x', '0');
+    this.renderer.setStyle(this.elRef.nativeElement, '--parallax-y', '0');
   }
 
   private typeTitle(index = 0) {

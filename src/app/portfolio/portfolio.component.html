@@ -1,4 +1,10 @@
 <section class="portfolio-header">
+  <div class="header-orb header-orb-1"></div>
+  <div class="header-orb header-orb-2"></div>
+  <div class="header-grid"></div>
+  <div class="particle-field">
+    <span class="particle" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12]"></span>
+  </div>
   <div class="container">
     <span class="header-badge">Portafolio</span>
     <div class="hero-badge">
@@ -18,6 +24,10 @@
 
 <section class="projects">
   <div class="projects-glow"></div>
+  <div class="projects-glow projects-glow--alt"></div>
+  <div class="particle-field particle-field--alt">
+    <span class="particle" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12]"></span>
+  </div>
   <div class="container">
     <div class="project-card" *ngFor="let project of projects; trackBy: trackByTitle">
       <div class="project-preview" [class.is-placeholder]="!project.siteUrl">
