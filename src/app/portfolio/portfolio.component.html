@@ -1,4 +1,7 @@
 <section class="portfolio-header">
+  <div class="header-orb header-orb-1"></div>
+  <div class="header-orb header-orb-2"></div>
+  <div class="header-grid"></div>
   <div class="container">
     <span class="header-badge">Portafolio</span>
     <h1>Proyectos en produccion y en proceso</h1>
@@ -11,6 +14,7 @@
 </section>
 
 <section class="projects">
+  <div class="projects-glow"></div>
   <div class="container">
     <div class="project-card" *ngFor="let project of projects; trackBy: trackByTitle">
       <div class="project-preview" [class.is-placeholder]="!project.siteUrl">
@@ -23,6 +27,9 @@
             />
           </a>
         </ng-container>
+        <div class="preview-overlay" *ngIf="project.siteUrl">
+          <span class="preview-action">Abrir sitio</span>
+        </div>
         <ng-template #previewPlaceholder>
           <div class="preview-placeholder">
             <span class="placeholder-label">{{ project.previewLabel || 'Sin publicacion' }}</span>

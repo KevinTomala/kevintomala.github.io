@@ -91,8 +91,8 @@ export class PortfolioComponent {
     },
     {
       title: 'Aplicacion Movil (sin publicar)',
-      description: 'Aplicacion movil construida para flujos internos. Aun no publicada.',
-      technologies: ['React Native', 'Firebase'],
+      description: 'Aplicacion movil construida para gestión de reservaciones. Aun no publicada.',
+      technologies: ['Ionic', 'Angular', 'Firebase'],
       status: 'En progreso',
       category: 'Mobile',
       previewLabel: 'App movil sin publicacion',
