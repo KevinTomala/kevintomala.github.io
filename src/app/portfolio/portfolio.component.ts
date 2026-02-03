@@ -28,11 +28,11 @@ interface Project {
 export class PortfolioComponent {
   projects: Project[] = [
     {
-      title: 'Sistema Academico Automatizado',
+      title: 'ADEMY - Sistema de Administración Academica',
       description: 'Plataforma para gestion de matriculas, notas y reportes con arquitectura modular.',
-      technologies: ['Angular', 'Node.js', 'Docker', 'PowerShell'],
+      technologies: ['ReactJS', 'Node.js', 'Docker', 'MySQL'],
       siteUrl: 'https://sg-academico.vercel.app/',
-      repoUrl: 'https://github.com/kevintomala/academic-system',
+      repoUrl: 'https://github.com/KevinTomala/sg_academico',
       status: 'Listo',
       category: 'Web App',
       contributors: [
@@ -44,7 +44,7 @@ export class PortfolioComponent {
       title: 'Generador QR',
       description: 'Herramienta web para crear codigos QR personalizables y listos para descargar.',
       technologies: ['Angular', 'TypeScript', 'CSS'],
-      siteUrl: 'https://kevintomala.github.io/qr-generate/features',
+      siteUrl: 'https://kevintomala.github.io/qr-generate',
       repoUrl: 'https://github.com/KevinTomala/qr-generate',
       status: 'Listo',
       category: 'Web App',
@@ -66,9 +66,9 @@ export class PortfolioComponent {
       ]
     },
     {
-      title: 'LLES Dental',
+      title: 'LLESDental',
       description: 'Mantenimiento y mejoras de sitio clinico con acceso privado.',
-      technologies: ['Angular', 'Node.js'],
+      technologies: ['Angular', 'Node.js', 'MySQL'],
       siteUrl: 'https://llesdental.cendcap.com/login',
       repoUrl: 'https://github.com/cendcap/llesdental',
       status: 'En mantenimiento',

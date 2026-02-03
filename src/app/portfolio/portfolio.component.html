@@ -82,7 +82,7 @@
 
           <div class="detail-row">
             <span class="detail-label">Equipo</span>
-            <ng-container *ngIf="project.contributors?.length; else noTeam">
+            <ng-container *ngIf="project.contributors.length; else noTeam">
               <span class="detail-team">
                 <ng-container *ngFor="let person of project.contributors; let last = last">
                   <a class="detail-link" [href]="person.githubUrl" target="_blank" rel="noopener">
