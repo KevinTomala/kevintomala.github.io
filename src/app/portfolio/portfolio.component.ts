@@ -71,6 +71,17 @@ export class PortfolioComponent implements OnInit, OnDestroy {
       ]
     },
     {
+      title: 'CENDCAP',
+      description: 'Sitio institucional con actualizaciones de contenido y optimizacion.',
+      technologies: ['WordPress', 'HTML', 'CSS','JavaScript'],
+      siteUrl: 'https://cendcap.com/',
+      status: 'Listo',
+      category: 'Web',
+      contributors: [
+        { name: 'Kevin Tomala', githubUrl: 'https://github.com/kevintomala' }
+      ]
+    },
+    {
       title: 'LLESDental',
       description: 'Mantenimiento y mejoras de sitio clinico con acceso privado.',
       technologies: ['Angular', 'Node.js', 'MySQL'],
@@ -81,17 +92,6 @@ export class PortfolioComponent implements OnInit, OnDestroy {
       contributors: [
         { name: 'Kevin Tomala', githubUrl: 'https://github.com/kevintomala' },
         { name: 'cendcap', githubUrl: 'https://github.com/cendcap' }
-      ]
-    },
-    {
-      title: 'CENDCAP',
-      description: 'Sitio institucional con actualizaciones de contenido y optimizacion.',
-      technologies: ['WordPress', 'HTML', 'CSS'],
-      siteUrl: 'https://cendcap.com/',
-      status: 'Listo',
-      category: 'Web',
-      contributors: [
-        { name: 'Kevin Tomala', githubUrl: 'https://github.com/kevintomala' }
       ]
     },
     {
